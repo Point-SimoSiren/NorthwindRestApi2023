@@ -93,6 +93,11 @@ namespace NorthwindRestApi.Controllers
             }
         }
 
+        [HttpGet("cname/{cname}")]
+        public ActionResult GetByCompanyName(string cname) {
+            return Ok();
+        }
+
 
     }
 }
