@@ -9,8 +9,10 @@ namespace NorthwindRestApi.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
+
         // Alustetaan tietokantayhteys
         NorthwindContext db = new NorthwindContext();
+
 
         // Hakee kaikki asiakkaat
         [HttpGet]
@@ -54,6 +56,7 @@ namespace NorthwindRestApi.Controllers
 
         }
 
+
         // Uuden lisääminen
         [HttpPost]
         public ActionResult AddNew([FromBody] Customer cust)
@@ -69,6 +72,7 @@ namespace NorthwindRestApi.Controllers
                 return BadRequest("Tapahtui virhe. Lue lisää: " + e.InnerException);
             }
         }
+
 
         // Asiakkaan poistaminen
         [HttpDelete("{id}")]
@@ -87,18 +91,21 @@ namespace NorthwindRestApi.Controllers
 
                 return NotFound("Asiakasta id:llä " + id + " ei löytynyt.");
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 return BadRequest(e.InnerException);
             }
         }
+
 
         // Asikkaan muokkaaminen
         [HttpPut("{id}")]
         public ActionResult EditCustomer(string id, [FromBody] Customer customer)
         {
             var asiakas = db.Customers.Find(id);
-            if (asiakas != null) {
-                
+            if (asiakas != null)
+            {
+
                 asiakas.CompanyName = customer.CompanyName;
                 asiakas.ContactName = customer.ContactName;
                 asiakas.Address = customer.Address;
