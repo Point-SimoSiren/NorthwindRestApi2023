@@ -124,6 +124,29 @@ namespace NorthwindRestApi.Controllers
         }
 
 
+        // Hakee nimen osalla: /api/companyname/hakusana
+        [HttpGet("companyname/{cname}")]
+        public ActionResult GetByName(string cname)
+        {
+            try
+            {
+                var cust = db.Customers.Where(c => c.CompanyName.Contains(cname));
+
+                //var cust = from c in db.Customers where c.CompanyName.Contains(cname) select c; <-- sama mutta traditional
+
+
+                // var cust = db.Customers.Where(c => c.CompanyName == cname); <--- perfect match
+
+                return Ok(cust);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+
 
     }
 }
