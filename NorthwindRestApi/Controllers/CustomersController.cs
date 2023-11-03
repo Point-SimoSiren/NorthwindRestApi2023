@@ -76,7 +76,6 @@ namespace NorthwindRestApi.Controllers
         {
             try
             {
-
                 var asiakas = db.Customers.Find(id);
 
                 if (asiakas != null)
@@ -93,10 +92,30 @@ namespace NorthwindRestApi.Controllers
             }
         }
 
-        [HttpGet("cname/{cname}")]
-        public ActionResult GetByCompanyName(string cname) {
-            return Ok();
+        // Asikkaan muokkaaminen
+        [HttpPut("{id}")]
+        public ActionResult EditCustomer(string id, [FromBody] Customer customer)
+        {
+            var asiakas = db.Customers.Find(id);
+            if (asiakas != null) {
+                
+                asiakas.CompanyName = customer.CompanyName;
+                asiakas.ContactName = customer.ContactName;
+                asiakas.Address = customer.Address;
+                asiakas.City = customer.City;
+                asiakas.Region = customer.Region;
+                asiakas.PostalCode = customer.PostalCode;
+                asiakas.Country = customer.Country;
+                asiakas.Phone = customer.Phone;
+                asiakas.Fax = customer.Fax;
+
+                db.SaveChanges();
+                return Ok("Muokattu asiakasta " + asiakas.CompanyName);
+            }
+
+            return NotFound("Asikasta ei löytynyt id:llä " + id);
         }
+
 
 
     }
