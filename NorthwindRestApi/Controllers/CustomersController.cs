@@ -11,11 +11,22 @@ namespace NorthwindRestApi.Controllers
     {
 
         // Alustetaan tietokantayhteys
-        NorthwindContext db = new NorthwindContext();
+
+        // Perinteinen tapa
+        // NorthwindContext db = new NorthwindContext();
+
+        // Dependency injektion tapa
+        private NorthwindContext db;
+
+        public CustomersController(NorthwindContext dbparametri)
+        {
+            db = dbparametri;
+        }
 
 
-        // Hakee kaikki asiakkaat
-        [HttpGet]
+
+       //Hakee kaikki asiakkaat
+       [HttpGet]
         public ActionResult GetAllCustomers()
         {
             try
