@@ -54,6 +54,33 @@ namespace NorthwindRestApi.Controllers
 
         }
 
+               // Hakee asiakkaan nimen osalla
+        [HttpGet("companyname/{search}")]
+        public ActionResult GetCustomersByName(string search)
+        {
+            try
+            {
+                var asiakaat = db.Customers.Where(c => c.companyName.contains(search));
+                if (asiakaat != null)
+                {
+                    return Ok(asiakaat);
+                }
+                else
+                {
+                    return Ok("Hakusanalla ei löytynyt yhtään asiakasta.")
+                    
+                }
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Tapahtui virhe. Lue lisää: " + e);
+            }
+
+        }
+
+        
+
         // Uuden lisääminen
         [HttpPost]
         public ActionResult AddNew([FromBody] Customer cust)
