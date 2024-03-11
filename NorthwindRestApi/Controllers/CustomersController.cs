@@ -61,6 +61,9 @@ namespace NorthwindRestApi.Controllers
             try
             {
                 var asiakaat = db.Customers.Where(c => c.companyName.contains(search));
+               // var asiakaat = db.Customers.Where(c => c.companyName == search); <---- perfect match
+               var asiakkaat = from c in db.Customers where c.companyName.contains(search) // Sama mutta perinteinen
+               
                 if (asiakaat != null)
                 {
                     return Ok(asiakaat);
