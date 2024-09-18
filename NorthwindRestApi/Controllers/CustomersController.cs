@@ -116,16 +116,9 @@ namespace NorthwindRestApi.Controllers
             var asiakas = db.Customers.Find(id);
             if (asiakas != null)
             {
-
-                asiakas.CompanyName = customer.CompanyName;
-                asiakas.ContactName = customer.ContactName;
-                asiakas.Address = customer.Address;
-                asiakas.City = customer.City;
-                asiakas.Region = customer.Region;
-                asiakas.PostalCode = customer.PostalCode;
-                asiakas.Country = customer.Country;
-                asiakas.Phone = customer.Phone;
-                asiakas.Fax = customer.Fax;
+                
+               asiakas = customer
+               // Ei ole pakko luetella kaikkia kenttiä sittenkään
 
                 db.SaveChanges();
                 return Ok("Muokattu asiakasta " + asiakas.CompanyName);
