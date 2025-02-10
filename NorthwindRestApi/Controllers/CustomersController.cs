@@ -12,6 +12,13 @@ namespace NorthwindRestApi.Controllers
         // Alustetaan tietokantayhteys
         NorthwindContext db = new NorthwindContext();
 
+        // dep injectio tapa
+        //NorthwindContext db;
+
+       // public CustomerController(NorthwindContext nwc) {
+      //      db = nwc;
+     //   }
+
         // Hakee kaikki asiakkaat
         [HttpGet]
         public ActionResult GetAllCustomers()
